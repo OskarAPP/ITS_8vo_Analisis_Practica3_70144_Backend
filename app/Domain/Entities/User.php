@@ -8,7 +8,7 @@ class User
     private $firstName;
     private $lastName;
     private $email;
-    private $password; // Contraseña encriptada
+    private $password; 
 
     public function __construct(string $firstName, string $lastName, string $email, string $password, int $id = null)
     {
@@ -19,7 +19,6 @@ class User
         $this->id        = $id;
     }
 
-    // Métodos getters
     public function getId(): ?int
     {
         return $this->id;

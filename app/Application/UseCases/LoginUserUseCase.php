@@ -20,11 +20,9 @@ class LoginUserUseCase
         if (!$user) {
             throw new \Exception('Credenciales inválidas');
         }
-        // Verificar la contraseña
         if (!Hash::check($password, $user->getPassword())) {
             throw new \Exception('Credenciales inválidas');
         }
-        // Aquí se podría generar y retornar un token
         return $user;
     }
 }
