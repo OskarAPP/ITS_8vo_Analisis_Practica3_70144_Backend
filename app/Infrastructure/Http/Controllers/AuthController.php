@@ -33,7 +33,7 @@ class AuthController extends Controller
                 $data['password']
             );
             
-            // Genera token para el usuario recién registrado
+           
             $tokenData = $this->generateToken($user);
 
             return response()->json([
@@ -61,7 +61,7 @@ class AuthController extends Controller
                 $data['password']
             );
 
-            // Genera token para el usuario autenticado
+           
             $tokenData = $this->generateToken($user);
 
             return response()->json([
@@ -88,21 +88,21 @@ class AuthController extends Controller
     private function generateToken($user)
     {
         $issuedAt = time();
-        $ttl = 20; // El token durará 20 segundos
+        $ttl = 10; // Tiempo de expiración en segundos
         $expirationTime = $issuedAt + $ttl;
         $payload = [
-            'iss' => env('APP_URL', 'http://localhost'), // Emisor
-            'sub' => $user->getId(),                       // Identificador del usuario
-            'iat' => $issuedAt,                            // Tiempo de emisión
-            'exp' => $expirationTime                       // Tiempo de expiración (timestamp)
+            'iss' => env('APP_URL', 'http://localhost'), // Dominio de la aplicación
+            'sub' => $user->getId(),           // ID del usuario          
+            'iat' => $issuedAt,                // Tiempo de emisión          
+            'exp' => $expirationTime            // Tiempo de expiración         
         ];
     
-        $jwtSecret = env('JWT_SECRET', 'a3f9c1b7d4e8f2a5c6d3e0b1f7a9d2c4');
+        $jwtSecret = env('JWT_SECRET', 'b6e2a9d4f1c7b3d8f0a5c9e7f2d1a3');
         $token = JWT::encode($payload, $jwtSecret, 'HS256');
     
         return [
             'token'      => $token,
-            'expires_in' => $ttl  // Retorna 20, es decir, 20 segundos de vida
+            'expires_in' => $ttl // Tiempo de expiración en segundos
         ];
     }  
 }
